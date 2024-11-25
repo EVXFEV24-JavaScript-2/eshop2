@@ -1,19 +1,18 @@
-import { Paper, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Container, Paper, Typography } from "@mui/material";
 
-export function ShopProductListItem() {
-  const [product, setProduct] = useState(null);
-
-  useEffect(() => {
-    fetch("https://dummyjson.com/products/1")
-      .then((res) => res.json())
-      .then(setProduct);
-  }, []);
+export function ShopProductListItem({ product }) {
+  if (product == null) {
+    return <>Loading...</>;
+  }
 
   return (
     <>
       <Paper>
-        <Typography>{product.title}</Typography>
+        <Container>
+          <Typography>{product.title}</Typography>
+          <img src={product.thumbnail} width="100%" />
+          <Typography>Price: ${product.price}</Typography>
+        </Container>
       </Paper>
     </>
   );

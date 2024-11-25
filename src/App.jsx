@@ -39,21 +39,21 @@ import { ShopPage } from "./pages/Shop";
 import { Container, Grid2 } from "@mui/material";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
-
-/*
-        <Link to="/">Home</Link>
-      <br />
-      <Link to="/about">About</Link>
-      <br />
-
-      {products.map((product, i) => (
-        <Link to={"/info/" + product.id}>Product {i}</Link>
-      ))}
-
-      <Outlet />
-*/
+import { useRecoilState } from "recoil";
+import { useEffect } from "react";
+import { productsState } from "./states/products";
 
 function App() {
+  const [products, setProducts] = useRecoilState(productsState);
+
+  useEffect(() => {
+    fetch("https://dummyjson.com/products")
+      .then((res) => res.json())
+      .then((res) => {
+        setProducts(res.products);
+      });
+  }, []);
+
   return (
     <>
       <Routes>
