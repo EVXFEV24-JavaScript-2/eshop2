@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const pages = ["Home", "Shop", "Featured", "Recommended"];
-export function Navbar() {
+export function Navbar({ setCartOpen }) {
   const navigate = useNavigate();
 
   return (
@@ -46,6 +46,12 @@ export function Navbar() {
                 label="Outlined"
                 variant="outlined"
               />
+            </Box>
+
+            <Box>
+              <Button variant="contained" onClick={() => setCartOpen(true)}>
+                Cart
+              </Button>
             </Box>
 
             <Box>

@@ -10,19 +10,45 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { cartState } from "../states/cart";
 
 export function ProductViewPage() {
   const params = useParams();
   const productId = Number.parseInt(params.id);
   const [products, setProducts] = useRecoilState(productsState);
+  const [cart, setCart] = useRecoilState(cartState);
 
   const product = products.find((all) => all.id === productId);
-  const [activeImage, setActiveImage] = useState(product.thumbnail);
-  console.log(activeImage);
+  const [activeImage, setActiveImage] = useState(
+    product === undefined ? null : product.thumbnail
+  );
 
   if (product === undefined) {
     return <>Go back to the home page.</>;
   }
+
+  const addToCart = () => {
+    const cartItem = {
+      product: product,
+      amount: 1,
+    };
+
+    const existing = cart.find((item) => item.product.id === product.id);
+    if (existing !== undefined) {
+      setCart(
+        cart.map((item) => {
+          if (item !== existing) {
+            return item;
+          }
+
+          return { ...item, amount: item.amount + 1 };
+        })
+      );
+      return;
+    }
+
+    setCart([...cart, cartItem]);
+  };
 
   return (
     <>
@@ -45,7 +71,7 @@ export function ProductViewPage() {
           <Container>
             <Typography>{product.title}</Typography>
             <Typography>{product.description}</Typography>
-            <Button>Add to cart</Button>
+            <Button onClick={addToCart}>Add to cart</Button>
             <Typography>${product.price}</Typography>
           </Container>
         </Grid2>

@@ -11,7 +11,7 @@ export function HomePage() {
       <Grid2 container spacing={2}>
         {products.map((product) => {
           return (
-            <Grid2 size={5}>
+            <Grid2 size={5} key={product.id}>
               <ShopProductListItem product={product} />
             </Grid2>
           );

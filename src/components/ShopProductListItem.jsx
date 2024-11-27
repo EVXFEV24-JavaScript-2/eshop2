@@ -28,7 +28,7 @@ export function ShopProductListItem({ product }) {
 
           <List>
             {product.tags.map((tag) => (
-              <ListItemText primary={tag} />
+              <ListItemText primary={tag} key={tag} />
             ))}
           </List>
         </Container>

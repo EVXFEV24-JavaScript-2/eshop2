@@ -1,4 +1,4 @@
-class ProductService {
+export class ProductService {
     // Ifall man hade behövt en API nyckel hade den kunna legat här
     /*constructor(apiKey) {
         this.apiKey = apiKey;
@@ -7,7 +7,12 @@ class ProductService {
     async getAllProducts() {}
 }
 
-class DummyJsonProductService extends ProductService {
+// Exempel med flera, andra, APIer:
+// PostService: get posts, create post, delete post
+// CommentService: get comments, create comment, delete comment, like comment
+// UserService: get user names, login, register, delete user
+
+export class DummyJsonProductService extends ProductService {
     async getAllProducts() {
         const response = await fetch("https://dummyjson.com/products");
         
@@ -16,7 +21,7 @@ class DummyJsonProductService extends ProductService {
             return { error: "Server error"};
         }*/
 
-        return await response.json();
+        return (await response.json()).products;
     }
 }
 
