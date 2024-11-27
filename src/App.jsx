@@ -77,7 +77,10 @@ function Layout() {
           <Navbar />
         </Grid2>
         <Grid2 size={12}>
-          <Container maxWidth="xl">
+          <Container
+            maxWidth="xl"
+            style={{ border: "1px solid black", padding: 0 }}
+          >
             <Outlet />
           </Container>
         </Grid2>
